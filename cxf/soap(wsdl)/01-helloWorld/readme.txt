@@ -18,4 +18,6 @@
    get output: List<User>
 
  caution:
- to avoid the http get bug, upgrade cxf version to 2.7.x
+ to avoid the http get bug,
+ upgrade cxf version to 2.7.x,
+ and run test case instead of browser!

@@ -7,14 +7,9 @@
                             http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
 
     <import resource="classpath:META-INF/cxf/cxf.xml"/>
-    <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
 
-    <!--config type 1: -->
-    <jaxws:endpoint id="helloWorld" implementor="com.mycompany.study.ws.server.HelloWorldImpl" address="/helloWorld"/>
+    <bean id="wsUser" class="com.mycompany.study.ws.server.ws.WsUserServiceImpl" autowire="byType"/>
 
-    <!--config type 2: -->
-    <!--<bean id="hello" class="demo.spring.server.HelloWorldImpl" />-->
-    <!--<jaxws:endpoint id="helloWorld" implementor="#hello" address="/HelloWorld" />-->
-
+    <jaxws:endpoint id="wsUserService" implementor="#wsUser" address="/userService"/>
 
 </beans>

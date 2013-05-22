@@ -9,6 +9,7 @@ import javax.xml.namespace.QName;
 import javax.xml.ws.Endpoint;
 import javax.xml.ws.Service;
 import javax.xml.ws.soap.SOAPBinding;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,12 +22,19 @@ public class TestWebService {
     public void testClient(){
         QName SERVICE_NAME = new QName("http://server.ws.study.mycompany.com/", "HelloWorld");
         QName PORT_NAME = new QName("http://server.ws.study.mycompany.com/", "HelloWorldPort");
-        String ENDPOINT_ADDRESS = "http://localhost:8080/services/HelloWorld";
+        String ENDPOINT_ADDRESS = "http://localhost:8080/services/helloWorld";
 
         Service service = Service.create(SERVICE_NAME);
         service.addPort(PORT_NAME, SOAPBinding.SOAP11HTTP_BINDING, ENDPOINT_ADDRESS);
         HelloWorld hw = service.getPort(HelloWorld.class);
         System.out.println(hw.sayHi("World"));
+
+        User u = new User();
+        u.setName("Mike");
+        u.setBirthday(new Date());
+        u.setHeight(175);
+        u.setMarried(true);
+        System.out.println(hw.sayHiToUser(u));
 
         User user = hw.getUser("jack");
         System.out.println(user);

@@ -17,6 +17,11 @@ public class HelloWorldImpl implements HelloWorld {
         return "Hello " + name;
     }
 
+    public String sayHiToUser(User user) {
+        System.out.println("sayHiToUser called: " + user);
+        return "Hello " + user.getName();
+    }
+
     public User getUser(String name) {
         System.out.println("getUser called");
         User user = new User(name , new Date(), 175 , true);

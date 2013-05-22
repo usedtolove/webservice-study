@@ -10,6 +10,8 @@ import java.util.List;
 public interface HelloWorld {
     String sayHi(@WebParam(name = "name") String name);
 
+    String sayHiToUser(@WebParam(name = "user") User user);
+
     User getUser(@WebParam(name = "name")
                  String name);
 
