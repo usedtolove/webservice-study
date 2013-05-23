@@ -3,15 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.mycompany.webservice</groupId>
-    <artifactId>cxf-03-spring-db-sg</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>jax-rs-basic</artifactId>
+    <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>spring-db-sg::root</name>
-
-    <modules>
-        <module>01-java</module>
-        <module>02-gwt</module>
-    </modules>
+    <name>JAX-RS Basic</name>
+    <description>a simple JAX-RS Basic Demo</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,7 +15,6 @@
         <maven.compiler.target>1.6</maven.compiler.target>
         <spring.version>3.2.2.RELEASE</spring.version>
         <hibernate.version>4.1.10.Final</hibernate.version>
-        <!--<cxf.version>2.7.5</cxf.version>-->
         <cxf.version>2.6.8</cxf.version>
         <gwt.version>2.5.0</gwt.version>
         <smartgwt.version>3.1</smartgwt.version>
@@ -92,6 +87,11 @@
             <artifactId>cxf-rt-transports-http</artifactId>
             <version>${cxf.version}</version>
         </dependency>
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>jsr311-api</artifactId>
+            <version>1.1.1</version>
+        </dependency>
         <!--else-->
         <dependency>
             <groupId>junit</groupId>
@@ -121,62 +121,14 @@
     </dependencies>
 
     <build>
-        <pluginManagement>
-            <plugins>
-                <!-- gwt-maven-plugin -->
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>gwt-maven-plugin</artifactId>
-                    <version>2.5.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-install-plugin</artifactId>
-                    <version>2.4</version>
-                </plugin>
-                <!--maven-war-plugin-->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <version>2.3</version>
-                </plugin>
-                <!--maven-clean-plugin-->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-clean-plugin</artifactId>
-                    <version>2.5</version>
-                </plugin>
-                <!--maven-jar-plugin-->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>2.4</version>
-                </plugin>
-                <!--maven-compiler-plugin-->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.0</version>
-                    <configuration>
-                        <source>${maven.compiler.source}</source>
-                        <target>${maven.compiler.target}</target>
-                        <encoding>UTF-8</encoding>
-                    </configuration>
-                </plugin>
-                <!--maven-jetty-plugin-->
-                <plugin>
-                    <groupId>org.mortbay.jetty</groupId>
-                    <artifactId>jetty-maven-plugin</artifactId>
-                    <version>8.1.8.v20121106</version>
-                </plugin>
-                <!--tomcat7-maven-plugin-->
-                <plugin>
-                    <groupId>org.apache.tomcat.maven</groupId>
-                    <artifactId>tomcat7-maven-plugin</artifactId>
-                    <version>2.1</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
+        <plugins>
+            <!--jetty-maven-plugin-->
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>8.1.8.v20121106</version>
+            </plugin>
+        </plugins>
     </build>
 
 </project>
