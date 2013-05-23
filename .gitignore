@@ -1,4 +1,12 @@
 #################
+## GWT
+#################
+gwt-unitCache/
+deploy/
+
+/cxf/soap(wsdl)/03-spring-db-sg/02-gwt/src/main/webapp/demo/
+
+#################
 ## IDEA
 #################
 .idea
@@ -10,12 +18,11 @@
 #################
 ## Maven 
 #################
-*/target/**
+target/
 
 #################
 ## Eclipse
 #################
-
 *.pydevproject
 .project
 .metadata
