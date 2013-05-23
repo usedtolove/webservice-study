@@ -5,7 +5,8 @@
        xmlns:jaxws="http://cxf.apache.org/jaxws"
        xmlns:jaxrs="http://cxf.apache.org/jaxrs"
        xsi:schemaLocation="
-       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
        http://cxf.apache.org/core
        http://cxf.apache.org/schemas/core.xsd
        http://cxf.apache.org/jaxws
@@ -16,10 +17,8 @@
 
     <!-- Load CXF modules from cxf.jar -->
     <import resource="classpath:META-INF/cxf/cxf.xml"/>
-    <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
-    <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
 
-    <!--logging-->
+    <!--logging -->
     <cxf:bus>
         <cxf:features>
             <cxf:logging/>
@@ -29,46 +28,22 @@
     <!-- customerService bean -->
     <bean id="customerService" class="demo.spring.server.WsCustomerServiceImpl"/>
 
-    <!-- Exposing customerService as a rest service -->
+    <!-- exposing customerService as a rest service -->
     <jaxrs:server id="restServer" address="/rest/">
         <jaxrs:serviceBeans>
             <ref bean="customerService"/>
         </jaxrs:serviceBeans>
+        <!-- register Jackson JSON providers -->
+        <jaxrs:providers>
+            <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
+        </jaxrs:providers>
+        <!-- runtime read '.xml' or '.json' suffix to mapping matched Content-Type value -->
         <jaxrs:extensionMappings>
-            <entry key="feed" value="application/atom+xml"/>
             <entry key="json" value="application/json"/>
             <entry key="xml" value="application/xml"/>
-            <entry key="html" value="text/html"/>
         </jaxrs:extensionMappings>
     </jaxrs:server>
 
-    <!-- Exposing the customerService as a SOAP service -->
-    <!--<bean id="jaxbBean"
-          class="org.apache.cxf.jaxb.JAXBDataBinding"
-          scope="prototype"/>-->
-
-    <!--<bean id="jaxws-and-aegis-service-factory"
-          class="org.apache.cxf.jaxws.support.JaxWsServiceFactoryBean"
-          scope="prototype">
-        <property name="dataBinding" ref="jaxbBean"/>
-        <property name="serviceConfigurations">
-            <list>
-                <bean class="org.apache.cxf.jaxws.support.JaxWsServiceConfiguration"/>
-                <bean class="org.apache.cxf.aegis.databinding.AegisServiceConfiguration"/>
-                <bean class="org.apache.cxf.service.factory.DefaultServiceConfiguration"/>
-            </list>
-        </property>
-    </bean>-->
+    <!-- exposing the customerService as a SOAP service -->
     <jaxws:endpoint id="customerServiceEndpoint" implementor="#customerService" address="/CustomerService" />
-
-   <!-- <jaxws:endpoint id="customerServiceEndpoint"
-                    serviceName="CustomerService"
-                    implementorClass="demo.spring.server.WsCustomerService"
-                    implementor="#customerService"
-                    address="/customerService">
-        <jaxws:serviceFactory>
-            <ref bean="jaxws-and-aegis-service-factory"/>
-        </jaxws:serviceFactory>
-    </jaxws:endpoint>-->
-
 </beans>

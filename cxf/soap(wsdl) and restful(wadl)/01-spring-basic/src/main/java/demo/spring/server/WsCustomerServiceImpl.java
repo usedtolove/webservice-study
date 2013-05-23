@@ -42,7 +42,7 @@ public class WsCustomerServiceImpl implements WsCustomerService{
     public Response addCustomer(Customer customer) {
         System.out.println("----invoking addCustomer, Customer name is: " + customer.getName());
         customer.setId(++currentId);
-
+        System.out.println("new customer id: "+currentId+" added!");
         customers.put(customer.getId(), customer);
 
         return Response.ok(customer).build();

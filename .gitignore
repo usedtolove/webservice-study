@@ -18,6 +18,7 @@ deploy/
 #################
 ## Maven 
 #################
+#ignore all target subfolders
 target/
 
 #################

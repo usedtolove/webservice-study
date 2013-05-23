@@ -1,22 +1,20 @@
-======================================================
-For SOAP:
 1. mvn clean jetty:run
 
-2. http://localhost:8888/services/CustomerService?wsdl
-   http://localhost:8888/services/CustomerService/getCustomer?id=123
-   http://localhost:8888/services/CustomerService/deleteCustomer?arg0=123
-   http://localhost:8888/services/CustomerService/getOrder?arg0=223
+2. For SOAP(access by browser):
+   http://localhost:8080/services/CustomerService?wsdl
+   http://localhost:8080/services/CustomerService/getCustomer?id=123
+   http://localhost:8080/services/CustomerService/deleteCustomer?id=123
+   http://localhost:8080/services/CustomerService/getOrder?orderId=223
 
-3. mvn jetty:stop
-======================================================
-For REST:
-1. mvn clean jetty:run
+3. For REST(access by browser):
+   http://localhost:8080/services/rest/?_wadl&_type=xml
+   http://localhost:8080/services/rest/customerservice/customers/123
+   http://localhost:8080/services/rest/customerservice/customers/123.json
+   http://localhost:8080/services/rest/customerservice/orders/223
+   http://localhost:8080/services/rest/customerservice/orders/223.json
+   http://localhost:8080/services/rest/customerservice/customers/123?_method=DELETE
 
-3. http://localhost:8888/services/rest/?_wadl&_type=xml
-   GET http://localhost:8888/services/rest/customerservice/customers/123
-   GET http://localhost:8888/services/rest/customerservice/orders/223/
-	
-   ps:PUT / DELETE may not test by browser directly	
+   ps:PUT and POST can not test by browser directly,
+      use TestRestClient (UnitTest) instead.
 
-3. mvn jetty:stop
-======================================================
+4. mvn jetty:stop

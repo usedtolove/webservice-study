@@ -15,6 +15,8 @@ public interface WsCustomerService {
     //for SOAP
     @WebMethod
     //for REST
+    //add JSON support
+    @Produces({"application/json","application/xml"})
     @GET
     @Path("/customers/{id}/")
     public Customer getCustomer(
@@ -35,11 +37,11 @@ public interface WsCustomerService {
     @WebMethod
     @DELETE
     @Path("/customers/{id}/")
-    public Response deleteCustomer(@PathParam("id") String id);
+    public Response deleteCustomer(@PathParam("id")@WebParam(name="id") String id);
 
     @WebMethod
     @GET
     @Path("/orders/{orderId}/")
-    public Order getOrder(@PathParam("orderId") String orderId);
+    public Order getOrder(@PathParam("orderId")@WebParam(name="orderId") String orderId);
 
 }
