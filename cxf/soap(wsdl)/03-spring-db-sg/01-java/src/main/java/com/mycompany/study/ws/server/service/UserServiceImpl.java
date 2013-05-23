@@ -13,11 +13,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService{
 
     public UserServiceImpl() {
-        System.out.println("*************************UserServiceImpl ...");
-        System.out.println("*************************UserServiceImpl ...");
-        System.out.println("*************************UserServiceImpl ...");
-        System.out.println("*************************UserServiceImpl ...");
-        System.out.println("*************************UserServiceImpl ...");
+        System.out.println("**** UserServiceImpl Empty Constructor ****");
     }
 
     @Resource
@@ -39,7 +35,7 @@ public class UserServiceImpl implements UserService{
         User u = userDao.getById(user.getId());
         u.setName(user.getName());
         u.setEmail(user.getEmail());
-        userDao.update(user);
+        userDao.update(u);
     }
 
     public void deleteById(String id) {

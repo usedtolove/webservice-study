@@ -17,7 +17,7 @@ public class TestUser extends AbstractJUnit4SpringContextTests {
     @Test
     public void save(){
         User user = new User();
-        user.setName("jack2");
+        user.setName("jack");
         user.setEmail("jack@163.com");
         userService.create(user);
     }

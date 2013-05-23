@@ -16,21 +16,19 @@ public class WsUserServiceImpl implements WsUserService{
 
     public UserService userService;
     public void setUserService(UserService userService) {
-        System.out.println("********** setUserService");
-        System.out.println("********** setUserService");
-        System.out.println("********** setUserService");
-        System.out.println("********** setUserService");
-        System.out.println("********** setUserService");
+        System.out.println("**** WsUserServiceImpl.setUserService() run ****");
         this.userService = userService;
     }
 
     public UserListOutputType getList() {
+        System.out.println("getList ...");
         UserListOutputType userListOutputType = new UserListOutputType();
         userListOutputType.getUser().addAll(userService.getList());
         return userListOutputType;
     }
 
     public OperationOutputType create(String name, String email) {
+        System.out.println("create ...");
         if(MailUtils.isNotValidEmail(email)){
             return new OperationOutputType("false" , "is a unavailable email!");
         }
@@ -42,6 +40,7 @@ public class WsUserServiceImpl implements WsUserService{
     }
 
     public OperationOutputType update(String id, String name, String email){
+        System.out.println("update ...");
         if(MailUtils.isNotValidEmail(email)){
             return new OperationOutputType("false" , "is a unavailable email!");
         }
@@ -54,6 +53,7 @@ public class WsUserServiceImpl implements WsUserService{
     }
 
     public OperationOutputType delete(String id) {
+        System.out.println("delete ...");
         userService.deleteById(id);
         return new OperationOutputType("true" , "record deleted");
     }
