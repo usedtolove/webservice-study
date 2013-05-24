@@ -45,5 +45,5 @@
     </jaxrs:server>
 
     <!-- exposing the customerService as a SOAP service -->
-    <jaxws:endpoint id="customerServiceEndpoint" implementor="#customerService" address="/CustomerService" />
+    <jaxws:endpoint id="customerServiceEndpoint" implementor="#customerService" address="/customerService" />
 </beans>

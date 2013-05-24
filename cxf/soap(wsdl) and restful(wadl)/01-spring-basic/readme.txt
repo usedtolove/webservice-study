@@ -7,7 +7,7 @@
    http://localhost:8080/services/CustomerService/getOrder?orderId=223
 
 3. For REST(access by browser):
-   http://localhost:8080/services/rest/?_wadl&_type=xml
+   http://localhost:8080/services/rest/?_wadl
    http://localhost:8080/services/rest/customerservice/customers/123
    http://localhost:8080/services/rest/customerservice/customers/123.json
    http://localhost:8080/services/rest/customerservice/orders/223
