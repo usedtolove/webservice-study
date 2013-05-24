@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:cxf="http://cxf.apache.org/core"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://cxf.apache.org/core
+       http://cxf.apache.org/schemas/core.xsd
+       http://cxf.apache.org/jaxws
+       http://cxf.apache.org/schemas/jaxws.xsd
+       http://cxf.apache.org/jaxrs
+       http://cxf.apache.org/schemas/jaxrs.xsd"
+       default-autowire="byName">
+
+    <!-- Load CXF modules from cxf.jar -->
+    <import resource="classpath:META-INF/cxf/cxf.xml"/>
+
+    <!--logging -->
+    <cxf:bus>
+        <cxf:features>
+            <cxf:logging/>
+        </cxf:features>
+    </cxf:bus>
+
+    <!-- customerService bean -->
+    <bean id="customerService" class="com.mycompany.webservice.server.webservice.WsUserServiceImpl"/>
+
+    <!-- exposing customerService as a rest service -->
+    <jaxrs:server id="restServer" address="/rest/">
+        <jaxrs:serviceBeans>
+            <ref bean="customerService"/>
+        </jaxrs:serviceBeans>
+        <!-- register Jackson JSON providers -->
+        <jaxrs:providers>
+            <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
+        </jaxrs:providers>
+        <!-- runtime read '.xml' or '.json' suffix to mapping matched Content-Type value -->
+        <jaxrs:extensionMappings>
+            <entry key="json" value="application/json"/>
+            <entry key="xml" value="application/xml"/>
+        </jaxrs:extensionMappings>
+    </jaxrs:server>
+
+    <!-- exposing the customerService as a SOAP service -->
+    <jaxws:endpoint id="customerServiceEndpoint" implementor="#customerService" address="/customerService" />
+</beans>
