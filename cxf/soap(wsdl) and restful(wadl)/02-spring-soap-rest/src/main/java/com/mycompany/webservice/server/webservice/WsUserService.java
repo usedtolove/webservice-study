@@ -11,14 +11,17 @@ import javax.jws.WebService;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 /**
  * The interface exposed as soap and rest
  *
  * @ WebService is for soap
- * @ Path is for the rest top path, ,should be the same as cxf-config.xml
+ * @ Path is for the rest top path
+ *
  * @ WebMethod is for SOAP
  * @ WebParam is for SOAP parameter
+ *
  * @ GET/POST/PUT/DELETE is for REST
  * @ Path is for the REST service path
  * @ PathParam is for REST parameter in url
@@ -27,44 +30,33 @@ import javax.ws.rs.core.Response;
  */
 
 @WebService
-@Path("/userService/")
-//@Produces("application/xml")
+@Path("/users")
+@Produces({MediaType.APPLICATION_JSON , MediaType.APPLICATION_XML})
 public interface WsUserService {
 
     @WebMethod
     @GET
-    @Path("/users/")
-    @Produces({MediaType.APPLICATION_JSON , MediaType.APPLICATION_XML})
     public UserListOutputType getList();
 
     @WebMethod
-    @POST
-    @Path("/users/")
-    @Consumes("application/x-www-form-urlencoded")
-    public Response addUser(
-            //arg name
-            @WebParam(name = "name")
-            @FormParam("name")
-            String name,
-            @WebParam(name = "email")
-            @FormParam("email")
-            String email);
+    @GET
+    @Path("/{id}")
+    public User get(@WebParam(name = "id")
+                     @PathParam("id")
+                     String id);
 
     @WebMethod
     @POST
-    @Path("/users2/")
-    public Response addUser2(User user);
+    public void addUser(@WebParam(name = "user")User user);
 
     @WebMethod
     @PUT
-    @Path("/users/")
-    public Response update(User user);
+    public void update(User user);
 
     @WebMethod
     @DELETE
-    @Path("/users/{id}/")
-    public Response delete(
-            @PathParam("id")
-            @WebParam(name = "id")
-            String id);
+    @Path("/{id}")
+    public void delete(@WebParam(name = "id")
+                            @PathParam("id")
+                            String id);
 }

@@ -6,11 +6,14 @@ import com.mycompany.webservice.server.webservice.type.UserListOutputType;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.jws.WebParam;
 import javax.jws.WebService;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
-@Service("wsUserServiceImpl")
-@WebService(endpointInterface = "com.mycompany.webservice.server.webservice.WsUserService")
+@WebService(endpointInterface = "com.mycompany.webservice.server.webservice.WsUserService",
+           serviceName = "WsUserService")
 public class WsUserServiceImpl implements WsUserService {
 
     @Resource
@@ -22,42 +25,29 @@ public class WsUserServiceImpl implements WsUserService {
         return userListOutputType;
     }
 
-    public Response addUser(String name, String email) {
-        User user = new User();
-        user.setName(name);
-        user.setEmail(email);
-        userService.create(user);
-        return Response.ok(user).build();
+    public User get(String id) {
+        return userService.getById(id);
     }
 
-    public Response addUser2(User user) {
+
+    public void addUser(User user) {
         userService.create(user);
-        return Response.ok(user).build();
     }
 
-    public Response update(User user) {
+    public void update(User user) {
         User u = userService.getById(user.getId());
-        Response r;
         if (u != null) {
             u.setName(user.getName());
             u.setEmail(user.getEmail());
             userService.update(u);
-            r = Response.ok(u).build();
-        } else {
-            r = Response.notModified().build();
         }
-        return r;
     }
 
-    public Response delete(String id) {
+    public void delete(String id) {
         User user = userService.getById(id);
         Response r;
         if (user != null) {
             userService.deleteById(id);
-            r = Response.ok().build();
-        } else {
-            r = Response.notModified().build();
         }
-        return r;
     }
 }

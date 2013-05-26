@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService{
         User u = userDao.getById(user.getId());
         u.setName(user.getName());
         u.setEmail(user.getEmail());
-        userDao.update(user);
+        userDao.update(u);
     }
 
     public void deleteById(String id) {

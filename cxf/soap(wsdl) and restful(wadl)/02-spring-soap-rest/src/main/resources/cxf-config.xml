@@ -26,12 +26,12 @@
     </cxf:bus>
 
     <!-- customerService bean -->
-    <bean id="customerService" class="com.mycompany.webservice.server.webservice.WsUserServiceImpl"/>
+    <bean id="wsUserServiceImpl" class="com.mycompany.webservice.server.webservice.WsUserServiceImpl"/>
 
     <!-- exposing customerService as a rest service -->
     <jaxrs:server id="restServer" address="/rest/">
         <jaxrs:serviceBeans>
-            <ref bean="customerService"/>
+            <ref bean="wsUserServiceImpl"/>
         </jaxrs:serviceBeans>
         <!-- register Jackson JSON providers -->
         <jaxrs:providers>
@@ -44,6 +44,6 @@
         </jaxrs:extensionMappings>
     </jaxrs:server>
 
-    <!-- exposing the customerService as a SOAP service -->
-    <jaxws:endpoint id="customerServiceEndpoint" implementor="#customerService" address="/customerService" />
+    <!-- exposing the userService as a SOAP service -->
+    <jaxws:endpoint id="userServiceEndpoint" implementor="#wsUserServiceImpl" address="/user" />
 </beans>
